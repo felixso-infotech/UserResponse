@@ -1,0 +1,41 @@
+/**
+ * Love entity.
+ * @author Anjali
+ */
+entity Love{
+	userId String,
+	commitedActivityId Long,
+    completedChallengeId Long,
+    dateAndTime ZonedDateTime
+}
+
+/**
+ * Comment entity.
+ * @author Anjali
+ */
+entity Comment{	
+    description String,
+    userId String,
+	commitedActivityId Long,
+    completedChallengeId Long,
+    dateAndTime ZonedDateTime
+}
+
+/**
+ * Reply entity.
+ * @author Anjali
+ */
+entity Reply {
+	description String,  
+    userId String,
+    dateAndTime ZonedDateTime
+}
+
+relationship OneToMany{
+	Comment{replies} to Reply,
+    Comment{loves} to Love,
+    Reply{loves} to Love     
+}   
+paginate * with pagination
+dto * with mapstruct
+service all with serviceImpl

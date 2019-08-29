@@ -1,0 +1,46 @@
+{
+    "name": "Love",
+    "fields": [
+        {
+            "fieldName": "userId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "commitedActivityId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "completedChallengeId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "dateAndTime",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "comment",
+            "otherEntityName": "comment",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "reply",
+            "otherEntityName": "reply",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190823042043",
+    "javadoc": "Love entity.\n@author Anjali",
+    "entityTableName": "love",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "UserResponse",
+    "applications": "*",
+    "microserviceName": "UserResponse"
+}

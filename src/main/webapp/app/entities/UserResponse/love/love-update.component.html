@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-love-heading">Create or edit a Love</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!love.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="love.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_userId">User Id</label>
+                    <input type="text" class="form-control" name="userId" id="field_userId"
+                        [(ngModel)]="love.userId" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_commitedActivityId">Commited Activity Id</label>
+                    <input type="number" class="form-control" name="commitedActivityId" id="field_commitedActivityId"
+                        [(ngModel)]="love.commitedActivityId" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_completedChallengeId">Completed Challenge Id</label>
+                    <input type="number" class="form-control" name="completedChallengeId" id="field_completedChallengeId"
+                        [(ngModel)]="love.completedChallengeId" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateAndTime">Date And Time</label>
+                    <div class="d-flex">
+                        <input id="field_dateAndTime" type="datetime-local" class="form-control" name="dateAndTime" [(ngModel)]="dateAndTime"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_comment">Comment</label>
+                    <select class="form-control" id="field_comment" name="comment" [(ngModel)]="love.commentId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="commentOption.id" *ngFor="let commentOption of comments; trackBy: trackCommentById">{{commentOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_reply">Reply</label>
+                    <select class="form-control" id="field_reply" name="reply" [(ngModel)]="love.replyId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="replyOption.id" *ngFor="let replyOption of replies; trackBy: trackReplyById">{{replyOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

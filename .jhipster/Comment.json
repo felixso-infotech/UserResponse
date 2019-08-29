@@ -1,0 +1,50 @@
+{
+    "name": "Comment",
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "userId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "commitedActivityId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "completedChallengeId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "dateAndTime",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "replies",
+            "otherEntityName": "reply",
+            "otherEntityRelationshipName": "comment"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "loves",
+            "otherEntityName": "love",
+            "otherEntityRelationshipName": "comment"
+        }
+    ],
+    "changelogDate": "20190823042044",
+    "javadoc": "Comment entity.\n@author Anjali",
+    "entityTableName": "comment",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "UserResponse",
+    "applications": "*",
+    "microserviceName": "UserResponse"
+}

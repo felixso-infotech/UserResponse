@@ -1,0 +1,42 @@
+{
+    "name": "Reply",
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "userId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateAndTime",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "comment",
+            "otherEntityName": "comment",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "loves",
+            "otherEntityName": "love",
+            "otherEntityRelationshipName": "reply"
+        }
+    ],
+    "changelogDate": "20190823042045",
+    "javadoc": "Reply entity.\n@author Anjali",
+    "entityTableName": "reply",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "UserResponse",
+    "applications": "*",
+    "microserviceName": "UserResponse"
+}

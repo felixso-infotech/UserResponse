@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="love">
+            <h2><span>Love</span> {{love.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>User Id</span></dt>
+                <dd>
+                    <span>{{love.userId}}</span>
+                </dd>
+                <dt><span>Commited Activity Id</span></dt>
+                <dd>
+                    <span>{{love.commitedActivityId}}</span>
+                </dd>
+                <dt><span>Completed Challenge Id</span></dt>
+                <dd>
+                    <span>{{love.completedChallengeId}}</span>
+                </dd>
+                <dt><span>Date And Time</span></dt>
+                <dd>
+                    <span>{{love.dateAndTime}}</span>
+                </dd>
+                <dt><span>Comment</span></dt>
+                <dd>
+                    <div *ngIf="love.commentId">
+                        <a [routerLink]="['/comment', love.commentId, 'view']">{{love.commentId}}</a>
+                    </div>
+                </dd>
+                <dt><span>Reply</span></dt>
+                <dd>
+                    <div *ngIf="love.replyId">
+                        <a [routerLink]="['/reply', love.replyId, 'view']">{{love.replyId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/love', love.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

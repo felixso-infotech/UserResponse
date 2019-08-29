@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="reply">
+            <h2><span>Reply</span> {{reply.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{reply.description}}</span>
+                </dd>
+                <dt><span>User Id</span></dt>
+                <dd>
+                    <span>{{reply.userId}}</span>
+                </dd>
+                <dt><span>Date And Time</span></dt>
+                <dd>
+                    <span>{{reply.dateAndTime}}</span>
+                </dd>
+                <dt><span>Comment</span></dt>
+                <dd>
+                    <div *ngIf="reply.commentId">
+                        <a [routerLink]="['/comment', reply.commentId, 'view']">{{reply.commentId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/reply', reply.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
