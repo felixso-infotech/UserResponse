@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.felixsoinfotech.user_response.service.dto.CommentDTO;
+import com.felixsoinfotech.user_response.service.dto.LoveDTO;
+import com.felixsoinfotech.user_response.service.dto.ReplyDTO;
 import com.felixsoinfotech.user_response.web.rest.util.PaginationUtil;
 import com.felixsoinfotech.user_response.service.AggregateQueryService;
 
@@ -30,38 +32,117 @@ public class AggregateQueryResource {
 
 	private static final String ENTITY_NAME = "userResponseAggregateQueryResource";
 
-	/*@Autowired
+	@Autowired
 	private AggregateQueryService AggregateQueryService;
+
+	/**
+	 * GET /comments : get all the comments by commitedActivityId.
+	 *
+	 * @param commitedActivityId
+	 *            the activity id to retrieve comments,pageable the pagination
+	 *            information
+	 * @return the ResponseEntity with status 200 (OK) and the list of comments
+	 *         in body
+	 */
+	@GetMapping("/query/get-comments-by-commitedActivityId/{commitedActivityId}")
+	@Timed
+	public ResponseEntity<List<CommentDTO>> getAllCommentsByCommitedActivityId(Pageable pageable,
+			@PathVariable Long commitedActivityId) {
+		log.debug("REST request to get a page of Comments");
+		Page<CommentDTO> page = AggregateQueryService.findAllCommentsByCommitedActivityId(pageable, commitedActivityId);
+		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page,
+				"/query/get-comments-by-commitedActivityId/{commitedActivityId}");
+		return ResponseEntity.ok().headers(headers).body(page.getContent());
+	}
+
+	/**
+	 * GET /comments : get number of comments by commitedActivityId.
+	 *
+	 * @param commitedActivityId
+	 *            the activity id to retrieve number of comments
+	 * @return the ResponseEntity with status 200 (OK) and the number of comments
+	 *         in body
+	 */
+	@GetMapping("/query/numberofcomments-by-commitedActivityId/{commitedActivityId}")
+	@Timed
+	public ResponseEntity<Long> getNumberOfCommentsByCommitedActivityId(@PathVariable Long commitedActivityId) {
+		log.debug("REST request to get number of Comments by commitedActivityId");
+		Long numberOfComments = AggregateQueryService.findNumberOfCommentsByCommitedActivityId(commitedActivityId);
+		return ResponseEntity.ok().body(numberOfComments);
+	}
 	
-	*//**
-     * GET  /comments : get all the comments by commitedActivityId.
+	/**
+     * GET  /replies : get all the replies by commentId.
      *
-     * @param commitedActivityId the activity id to retrive comments,pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of comments in body
-     *//*
-    @GetMapping("/query/get-comments-by-commitedActivityId/{commitedActivityId}")
+     * @param commentId the commentId to retrieve replies,pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of replies in body
+     */
+    @GetMapping("/query/get-replies-by-commentId/{commentId}")
     @Timed
-    public ResponseEntity<List<CommentDTO>> getAllCommentsByCommitedActivityId(Pageable pageable,@PathVariable Long commitedActivityId) {
-        log.debug("REST request to get a page of Comments");
-        Page<CommentDTO> page = AggregateQueryService.findAllCommentsByCommitedActivityId(pageable,commitedActivityId);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/query/get-comments-by-commitedActivityId/{commitedActivityId}");
+    public ResponseEntity<List<ReplyDTO>> getAllRepliesByCommentId(Pageable pageable,@PathVariable Long commentId) {
+        log.debug("REST request to get a page of Replies by commentId");
+        Page<ReplyDTO> page = AggregateQueryService.findAllRepliesByCommentId(pageable,commentId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/query/get-replies-by-commentId/{commentId}");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
-    
-    *//**
-     * GET  /comments : get all the comments by commitedActivityId.
-     *
-     * @param commitedActivityId the activity id to retrive comments,pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of comments in body
-     *//*
-    @GetMapping("/query/numberofcomments-by-commitedActivityId/{commitedActivityId}")
-    @Timed
-    public ResponseEntity<List<CommentDTO>> getNumberOfCommentsByCommitedActivityId(Pageable pageable,@PathVariable Long commitedActivityId) {
-        log.debug("REST request to get a page of Comments");
-        Page<CommentDTO> page = AggregateQueryService.findAllCommentsByCommitedActivityId(pageable,commitedActivityId);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/query/get-comments-by-commitedActivityId/{commitedActivityId}");
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }*/
-    
-}
 
+	/**
+	 * GET /comments : get number of replies by commentId.
+	 *
+	 * @param commentId
+	 *            the commentId to retrieve number of replies
+	 * @return the ResponseEntity with status 200 (OK) and the number of replies
+	 *         in body
+	 */
+	@GetMapping("/query/numberofreplies-by-commentId/{commentId}")
+	@Timed
+	public ResponseEntity<Long> getNumberOfRepliesByCommentId(@PathVariable Long commentId) {
+		log.debug("REST request to get number of replies by comment id");
+		Long numberOfReplies = AggregateQueryService.findNumberOfRepliesByCommentId(commentId);
+		return ResponseEntity.ok().body(numberOfReplies);
+	}
+	
+	 /**
+     * GET  /loves : get number of loves of commitedActivity.
+     *
+     * @param commitedActivityId the commitedActivityId to get number of loves
+     * @return the ResponseEntity with status 200 (OK) and the number of loves in body
+     */
+    @GetMapping("/query/numberofloves-by-commitedActivityId/{commitedActivityId}")
+    @Timed
+    public ResponseEntity<Long> getNumberOfLovesByCommitedActivityId(@PathVariable Long commitedActivityId){
+        log.debug("REST request to get number of Loves of commitedActivity{}",commitedActivityId);
+        Long numberOfLovesOfCommitedActivity= AggregateQueryService.findNumberOfLovesByCommitedActivityId(commitedActivityId);
+        return ResponseEntity.ok().body(numberOfLovesOfCommitedActivity);
+    }
+
+    /**
+     * GET  /loves : get number of loves of comments.
+     *
+     * @param commentId the commentId to get number of loves
+     * @return the ResponseEntity with status 200 (OK) and the number of loves in body
+     */
+    @GetMapping("/query/numberofloves-by-commentId/{commentId}")
+    @Timed
+    public ResponseEntity<Long> getNumberOfLovesByCommentId(@PathVariable Long commentId){
+        log.debug("REST request to get number of Loves of comments{}",commentId);
+        Long numberOfLovesOfComment= AggregateQueryService.findNumberOfLovesByCommentId(commentId);
+        return ResponseEntity.ok().body(numberOfLovesOfComment);
+    }
+    
+    /**
+     * GET  /loves : get number of loves of replies.
+     *
+     * @param replyId the replyId to get number of loves
+     * @return the ResponseEntity with status 200 (OK) and the number of loves in body
+     */
+    @GetMapping("/query/numberofloves-by-replyId/{replyId}")
+    @Timed
+    public ResponseEntity<Long> getNumberOfLovesByReplyId(@PathVariable Long replyId){
+        log.debug("REST request to get number of Loves of replies{}",replyId);
+        Long numberOfLovesOfReply= AggregateQueryService.findNumberOfLovesByReplyId(replyId);
+        return ResponseEntity.ok().body(numberOfLovesOfReply);
+    }
+
+
+}

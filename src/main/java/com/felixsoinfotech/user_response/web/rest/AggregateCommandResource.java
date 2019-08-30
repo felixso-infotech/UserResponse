@@ -34,16 +34,16 @@ public class AggregateCommandResource {
 
 	private static final String ENTITY_NAME = "userResponseAggregateCommandResource";
 	
-	/*@Autowired
+	@Autowired
 	private AggregateCommandService AggregateCommandService;
 
-	*//**
+	/**
      * POST  /loves : save a new love.
      *
      * @param loveDTO the loveDTO to create
      * @return the ResponseEntity with status 201 (Created) and with body the new loveDTO, or with status 400 (Bad Request) if the love has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
-     *//*
+     */
     @PostMapping("/command/love-activity")
     @Timed
     public ResponseEntity<LoveDTO> loveActivity(@RequestBody LoveDTO loveDTO) throws URISyntaxException {
@@ -57,13 +57,13 @@ public class AggregateCommandResource {
             .body(result);
     }
     
-    *//**
+    /**
      * POST  /comments : save a new comment.
      *
      * @param commentDTO the commentDTO to create
      * @return the ResponseEntity with status 201 (Created) and with body the new commentDTO, or with status 400 (Bad Request) if the comment has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
-     *//*
+     */
     @PostMapping("/command/save-comment")
     @Timed
     public ResponseEntity<CommentDTO> saveComment(@RequestBody CommentDTO commentDTO) throws URISyntaxException {
@@ -77,13 +77,13 @@ public class AggregateCommandResource {
             .body(result);
     }
     
-    *//**
+    /**
      * POST  /replies : Create a new reply.
      *
      * @param replyDTO the replyDTO to create
      * @return the ResponseEntity with status 201 (Created) and with body the new replyDTO, or with status 400 (Bad Request) if the reply has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
-     *//*
+     */
     @PostMapping("/command/save-reply")
     @Timed
     public ResponseEntity<ReplyDTO> saveReply(@RequestBody ReplyDTO replyDTO) throws URISyntaxException {
@@ -97,12 +97,12 @@ public class AggregateCommandResource {
             .body(result);
     }
     
-    *//**
+    /**
      * DELETE  /loves : delete the loved activity of the user.
      *
      * @param deleteLoveModel the deleteLoveModel of the loveDTO to delete
      * @return the ResponseEntity with status 200 (OK)
-     *//*
+     */
     @DeleteMapping("/command/unlove-activity")
     @Timed
     public ResponseEntity<Void> unloveActivity(@RequestBody DeleteLoveModel deleteLoveModel) {
@@ -111,12 +111,12 @@ public class AggregateCommandResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, deleteLoveModel.toString())).build();
     }
 
-    *//**
+    /**
      * DELETE  /comments : delete the "id" comment.
      *
      * @param id the id of the commentDTO to delete
      * @return the ResponseEntity with status 200 (OK)
-     *//*
+     */
     @DeleteMapping("/command/delete-comment/{id}")
     @Timed
     public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
@@ -125,12 +125,12 @@ public class AggregateCommandResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    *//**
+    /**
      * DELETE  /replies/:id : delete the "id" reply.
      *
      * @param id the id of the replyDTO to delete
      * @return the ResponseEntity with status 200 (OK)
-     *//*
+     */
     @DeleteMapping("/command/delete-reply/{id}")
     @Timed
     public ResponseEntity<Void> deleteReply(@PathVariable Long id) {
@@ -138,5 +138,5 @@ public class AggregateCommandResource {
         AggregateCommandService.deleteReply(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
-*/    
+    
 }

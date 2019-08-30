@@ -30,7 +30,7 @@ public class AggregateCommandServiceImpl implements AggregateCommandService{
 
 	private final Logger log = LoggerFactory.getLogger(AggregateCommandServiceImpl.class);
 	
-	/* @Autowired
+	 @Autowired
 	 private LoveRepository loveRepository;
 
 	 @Autowired
@@ -49,12 +49,12 @@ public class AggregateCommandServiceImpl implements AggregateCommandService{
 	 private ReplyMapper replyMapper;
 
 
-	 *//**
+	 /**
      * Save a love.
      *
      * @param loveDTO the entity to save
      * @return the persisted entity
-     *//*
+     */
     @Override
     public LoveDTO saveLove(LoveDTO loveDTO) {
         log.debug("Request to save Love : {}", loveDTO);
@@ -64,12 +64,12 @@ public class AggregateCommandServiceImpl implements AggregateCommandService{
         return loveMapper.toDto(love);
     }
     
-    *//**
+    /**
      * Save a comment.
      *
      * @param commentDTO the entity to save
      * @return the persisted entity
-     *//*
+     */
     @Override
     public CommentDTO saveComment(CommentDTO commentDTO) {
         log.debug("Request to save Comment : {}", commentDTO);
@@ -79,12 +79,12 @@ public class AggregateCommandServiceImpl implements AggregateCommandService{
         return commentMapper.toDto(comment);
     }
 
-    *//**
+    /**
      * Save a reply.
      *
      * @param replyDTO the entity to save
      * @return the persisted entity
-     *//*
+     */
     @Override
     public ReplyDTO saveReply(ReplyDTO replyDTO) {
         log.debug("Request to save Reply : {}", replyDTO);
@@ -94,11 +94,11 @@ public class AggregateCommandServiceImpl implements AggregateCommandService{
         return replyMapper.toDto(reply);
     }
     
-    *//**
+    /**
      * Delete the loved activity of the user..
      *
      * @param id the id of the entity
-     *//*
+     */
     @Override
     public void deleteLove(DeleteLoveModel deleteLoveModel) {
         log.debug("Request to delete Love : {}", deleteLoveModel);
@@ -106,26 +106,26 @@ public class AggregateCommandServiceImpl implements AggregateCommandService{
         
     }
     
-    *//**
+    /**
      * Delete the comment by id.
      *
      * @param id the id of the entity
-     *//*
+     */
     @Override
     public void deleteComment(Long id) {
         log.debug("Request to delete Comment : {}", id);
         commentRepository.deleteById(id);
     }
     
-    *//**
+    /**
      * Delete the reply by id.
      *
      * @param id the id of the entity
-     *//*
+     */
     @Override
     public void deleteReply(Long id) {
         log.debug("Request to delete Reply : {}", id);
         replyRepository.deleteById(id);
     }
-*/
+
 }
