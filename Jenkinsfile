@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh '$M2_HOME/bin/mvn spring-boot:run'
+        sh '$M2_HOME/mvn spring-boot:run'
       }
     }
   }
