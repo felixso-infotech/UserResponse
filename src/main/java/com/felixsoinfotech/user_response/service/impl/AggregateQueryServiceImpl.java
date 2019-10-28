@@ -17,7 +17,7 @@ import com.felixsoinfotech.user_response.service.dto.ReplyDTO;
 import com.felixsoinfotech.user_response.service.mapper.CommentMapper;
 import com.felixsoinfotech.user_response.service.mapper.LoveMapper;
 import com.felixsoinfotech.user_response.service.mapper.ReplyMapper;
-import com.felixsoinfotech.user_response.web.rest.AggregateQueryResource;
+
 
 /**
  * Service Implementation for managing queries in user response service.

@@ -28,9 +28,9 @@ import com.felixsoinfotech.user_response.web.rest.util.HeaderUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class AggregateCommandResource {
+public class UserResponseAggregateCommandResource {
 
-	private final Logger log = LoggerFactory.getLogger(AggregateCommandResource.class);
+	private final Logger log = LoggerFactory.getLogger(UserResponseAggregateCommandResource.class);
 
 	private static final String ENTITY_NAME = "userResponseAggregateCommandResource";
 	

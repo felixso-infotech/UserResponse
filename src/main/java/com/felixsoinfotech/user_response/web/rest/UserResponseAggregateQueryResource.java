@@ -26,9 +26,9 @@ import com.felixsoinfotech.user_response.service.AggregateQueryService;
  */
 @RestController
 @RequestMapping("/api")
-public class AggregateQueryResource {
+public class UserResponseAggregateQueryResource {
 
-	private final Logger log = LoggerFactory.getLogger(AggregateQueryResource.class);
+	private final Logger log = LoggerFactory.getLogger(UserResponseAggregateQueryResource.class);
 
 	private static final String ENTITY_NAME = "userResponseAggregateQueryResource";
 
