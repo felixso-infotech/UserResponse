@@ -1,6 +1,7 @@
 package com.felixsoinfotech.user_response.web.rest;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,13 +20,17 @@ import com.felixsoinfotech.user_response.service.dto.CommentDTO;
 import com.felixsoinfotech.user_response.service.dto.LoveDTO;
 import com.felixsoinfotech.user_response.service.dto.ReplyDTO;
 import com.felixsoinfotech.user_response.web.rest.util.PaginationUtil;
+
+import io.github.jhipster.web.util.ResponseUtil;
+
+import com.felixsoinfotech.user_response.model.CountAggregate;
 import com.felixsoinfotech.user_response.service.AggregateQueryService;
 
 /**
  * REST controller for managing user response queries.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/query")
 public class UserResponseAggregateQueryResource {
 
 	private final Logger log = LoggerFactory.getLogger(UserResponseAggregateQueryResource.class);
@@ -35,6 +40,24 @@ public class UserResponseAggregateQueryResource {
 	@Autowired
 	private AggregateQueryService AggregateQueryService;
 
+	
+	/**
+	 * GET /comments : get number of comments by commitedActivityId.
+	 *
+	 * @param commitedActivityId
+	 *            the activity id to retrieve number of comments
+	 * @return the ResponseEntity with status 200 (OK) and the number of comments
+	 *         in body
+	 */
+	@GetMapping("/countofcomments-likes/{commitedActivityId}")
+	@Timed
+	public ResponseEntity<CountAggregate> getCountOfCommentsAndLikesByCommitedActivityId(@PathVariable Long commitedActivityId) {
+		log.debug("REST request to get number of Comments by commitedActivityId");
+		Optional<CountAggregate> countAggregate = AggregateQueryService.findCountOfCommentsAndLikesByCommitedActivityId(commitedActivityId);
+		 return ResponseUtil.wrapOrNotFound(countAggregate);
+	}
+	
+	
 	/**
 	 * GET /comments : get all the comments by commitedActivityId.
 	 *
@@ -44,7 +67,7 @@ public class UserResponseAggregateQueryResource {
 	 * @return the ResponseEntity with status 200 (OK) and the list of comments
 	 *         in body
 	 */
-	@GetMapping("/query/get-comments-by-commitedActivityId/{commitedActivityId}")
+	@GetMapping("/get-comments-by-commitedActivityId/{commitedActivityId}")
 	@Timed
 	public ResponseEntity<List<CommentDTO>> getAllCommentsByCommitedActivityId(Pageable pageable,
 			@PathVariable Long commitedActivityId) {
@@ -63,7 +86,7 @@ public class UserResponseAggregateQueryResource {
 	 * @return the ResponseEntity with status 200 (OK) and the number of comments
 	 *         in body
 	 */
-	@GetMapping("/query/numberofcomments-by-commitedActivityId/{commitedActivityId}")
+	@GetMapping("/numberofcomments-by-commitedActivityId/{commitedActivityId}")
 	@Timed
 	public ResponseEntity<Long> getNumberOfCommentsByCommitedActivityId(@PathVariable Long commitedActivityId) {
 		log.debug("REST request to get number of Comments by commitedActivityId");
@@ -77,7 +100,7 @@ public class UserResponseAggregateQueryResource {
      * @param commentId the commentId to retrieve replies,pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of replies in body
      */
-    @GetMapping("/query/get-replies-by-commentId/{commentId}")
+    @GetMapping("/get-replies-by-commentId/{commentId}")
     @Timed
     public ResponseEntity<List<ReplyDTO>> getAllRepliesByCommentId(Pageable pageable,@PathVariable Long commentId) {
         log.debug("REST request to get a page of Replies by commentId");
@@ -94,7 +117,7 @@ public class UserResponseAggregateQueryResource {
 	 * @return the ResponseEntity with status 200 (OK) and the number of replies
 	 *         in body
 	 */
-	@GetMapping("/query/numberofreplies-by-commentId/{commentId}")
+	@GetMapping("/numberofreplies-by-commentId/{commentId}")
 	@Timed
 	public ResponseEntity<Long> getNumberOfRepliesByCommentId(@PathVariable Long commentId) {
 		log.debug("REST request to get number of replies by comment id");
@@ -108,7 +131,7 @@ public class UserResponseAggregateQueryResource {
      * @param commitedActivityId the commitedActivityId to get number of loves
      * @return the ResponseEntity with status 200 (OK) and the number of loves in body
      */
-    @GetMapping("/query/numberofloves-by-commitedActivityId/{commitedActivityId}")
+    @GetMapping("/numberofloves-by-commitedActivityId/{commitedActivityId}")
     @Timed
     public ResponseEntity<Long> getNumberOfLovesByCommitedActivityId(@PathVariable Long commitedActivityId){
         log.debug("REST request to get number of Loves of commitedActivity{}",commitedActivityId);
@@ -122,7 +145,7 @@ public class UserResponseAggregateQueryResource {
      * @param commentId the commentId to get number of loves
      * @return the ResponseEntity with status 200 (OK) and the number of loves in body
      */
-    @GetMapping("/query/numberofloves-by-commentId/{commentId}")
+    @GetMapping("/numberofloves-by-commentId/{commentId}")
     @Timed
     public ResponseEntity<Long> getNumberOfLovesByCommentId(@PathVariable Long commentId){
         log.debug("REST request to get number of Loves of comments{}",commentId);
@@ -136,7 +159,7 @@ public class UserResponseAggregateQueryResource {
      * @param replyId the replyId to get number of loves
      * @return the ResponseEntity with status 200 (OK) and the number of loves in body
      */
-    @GetMapping("/query/numberofloves-by-replyId/{replyId}")
+    @GetMapping("/numberofloves-by-replyId/{replyId}")
     @Timed
     public ResponseEntity<Long> getNumberOfLovesByReplyId(@PathVariable Long replyId){
         log.debug("REST request to get number of Loves of replies{}",replyId);

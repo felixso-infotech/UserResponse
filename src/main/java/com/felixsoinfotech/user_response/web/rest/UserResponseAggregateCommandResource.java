@@ -27,7 +27,7 @@ import com.felixsoinfotech.user_response.web.rest.util.HeaderUtil;
  * REST controller for managing user response commands.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/command")
 public class UserResponseAggregateCommandResource {
 
 	private final Logger log = LoggerFactory.getLogger(UserResponseAggregateCommandResource.class);
@@ -44,7 +44,7 @@ public class UserResponseAggregateCommandResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new loveDTO, or with status 400 (Bad Request) if the love has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/command/love-activity")
+    @PostMapping("/love-activity")
     @Timed
     public ResponseEntity<LoveDTO> loveActivity(@RequestBody LoveDTO loveDTO) throws URISyntaxException {
         log.debug("REST request to save Love : {}", loveDTO);
@@ -64,7 +64,7 @@ public class UserResponseAggregateCommandResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new commentDTO, or with status 400 (Bad Request) if the comment has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/command/save-comment")
+    @PostMapping("/save-comment")
     @Timed
     public ResponseEntity<CommentDTO> saveComment(@RequestBody CommentDTO commentDTO) throws URISyntaxException {
         log.debug("REST request to save Comment : {}", commentDTO);
@@ -84,7 +84,7 @@ public class UserResponseAggregateCommandResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new replyDTO, or with status 400 (Bad Request) if the reply has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/command/save-reply")
+    @PostMapping("/save-reply")
     @Timed
     public ResponseEntity<ReplyDTO> saveReply(@RequestBody ReplyDTO replyDTO) throws URISyntaxException {
         log.debug("REST request to save Reply : {}", replyDTO);
@@ -103,7 +103,7 @@ public class UserResponseAggregateCommandResource {
      * @param deleteLoveModel the deleteLoveModel of the loveDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/command/unlove-activity")
+    @DeleteMapping("/unlove-activity")
     @Timed
     public ResponseEntity<Void> unloveActivity(@RequestBody DeleteLoveModel deleteLoveModel) {
         log.debug("REST request to delete Love activity of the user : {}", deleteLoveModel);
@@ -117,7 +117,7 @@ public class UserResponseAggregateCommandResource {
      * @param id the id of the commentDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/command/delete-comment/{id}")
+    @DeleteMapping("/delete-comment/{id}")
     @Timed
     public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
         log.debug("REST request to delete Comment : {}", id);
@@ -131,7 +131,7 @@ public class UserResponseAggregateCommandResource {
      * @param id the id of the replyDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/command/delete-reply/{id}")
+    @DeleteMapping("/delete-reply/{id}")
     @Timed
     public ResponseEntity<Void> deleteReply(@PathVariable Long id) {
         log.debug("REST request to delete Reply : {}", id);

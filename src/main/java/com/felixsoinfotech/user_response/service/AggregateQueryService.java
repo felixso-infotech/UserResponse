@@ -1,8 +1,11 @@
 package com.felixsoinfotech.user_response.service;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.felixsoinfotech.user_response.model.CountAggregate;
 import com.felixsoinfotech.user_response.service.dto.CommentDTO;
 import com.felixsoinfotech.user_response.service.dto.ReplyDTO;
 
@@ -63,4 +66,12 @@ public interface AggregateQueryService {
      * @return the number of entities
      */
     Long findNumberOfLovesByReplyId(Long replyId);
+
+    /**
+     * Get CountAggregate.
+     *
+     * @param commitedActivityId the commitedActivityId of the entity
+     * @return the entity
+     */
+	Optional<CountAggregate> findCountOfCommentsAndLikesByCommitedActivityId(Long commitedActivityId);
 }

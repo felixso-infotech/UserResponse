@@ -1,5 +1,7 @@
 package com.felixsoinfotech.user_response.service.impl;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.felixsoinfotech.user_response.model.CountAggregate;
 import com.felixsoinfotech.user_response.repository.CommentRepository;
 import com.felixsoinfotech.user_response.repository.LoveRepository;
 import com.felixsoinfotech.user_response.repository.ReplyRepository;
@@ -45,6 +48,27 @@ public class AggregateQueryServiceImpl implements AggregateQueryService {
 
 	@Autowired
     private LoveMapper loveMapper;
+	
+	
+	/**
+     * Get CountAggregate.
+     *
+     * @param commitedActivityId the commitedActivityId of the entity
+     * @return the entity
+     */
+	@Override
+	public Optional<CountAggregate> findCountOfCommentsAndLikesByCommitedActivityId(Long commitedActivityId) {
+		
+		CountAggregate countAggregate= new CountAggregate();
+		
+		countAggregate.setNoOfLoves(loveRepository.findNumberOfLovesByCommitedActivityId(commitedActivityId));
+		countAggregate.setNoOfComments(commentRepository.findNumberOfCommentsByCommitedActivityId(commitedActivityId));
+		
+		return Optional.of(countAggregate);		
+		
+	}
+    
+	
 
 	/**
      * Get all the comments by commitedActivityId.
@@ -129,6 +153,7 @@ public class AggregateQueryServiceImpl implements AggregateQueryService {
     	log.debug("Request to get number of loves by replyId");
         return loveRepository.findNumberOfLovesByReplyId(replyId);
     }
-    
+
+	
 
 }
