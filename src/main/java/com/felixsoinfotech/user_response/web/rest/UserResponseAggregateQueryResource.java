@@ -38,7 +38,7 @@ public class UserResponseAggregateQueryResource {
 	private static final String ENTITY_NAME = "userResponseAggregateQueryResource";
 
 	@Autowired
-	private AggregateQueryService AggregateQueryService;
+	private AggregateQueryService aggregateQueryService;
 
 	
 	/**
@@ -53,7 +53,7 @@ public class UserResponseAggregateQueryResource {
 	@Timed
 	public ResponseEntity<CountAggregate> getCountOfCommentsAndLikesByCommitedActivityId(@PathVariable Long commitedActivityId) {
 		log.debug("REST request to get number of Comments by commitedActivityId");
-		Optional<CountAggregate> countAggregate = AggregateQueryService.findCountOfCommentsAndLikesByCommitedActivityId(commitedActivityId);
+		Optional<CountAggregate> countAggregate = aggregateQueryService.findCountOfCommentsAndLikesByCommitedActivityId(commitedActivityId);
 		 return ResponseUtil.wrapOrNotFound(countAggregate);
 	}
 	
@@ -72,7 +72,7 @@ public class UserResponseAggregateQueryResource {
 	public ResponseEntity<List<CommentDTO>> getAllCommentsByCommitedActivityId(Pageable pageable,
 			@PathVariable Long commitedActivityId) {
 		log.debug("REST request to get a page of Comments");
-		Page<CommentDTO> page = AggregateQueryService.findAllCommentsByCommitedActivityId(pageable, commitedActivityId);
+		Page<CommentDTO> page = aggregateQueryService.findAllCommentsByCommitedActivityId(pageable, commitedActivityId);
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page,
 				"/query/get-comments-by-commitedActivityId/{commitedActivityId}");
 		return ResponseEntity.ok().headers(headers).body(page.getContent());
@@ -90,7 +90,7 @@ public class UserResponseAggregateQueryResource {
 	@Timed
 	public ResponseEntity<Long> getNumberOfCommentsByCommitedActivityId(@PathVariable Long commitedActivityId) {
 		log.debug("REST request to get number of Comments by commitedActivityId");
-		Long numberOfComments = AggregateQueryService.findNumberOfCommentsByCommitedActivityId(commitedActivityId);
+		Long numberOfComments = aggregateQueryService.findNumberOfCommentsByCommitedActivityId(commitedActivityId);
 		return ResponseEntity.ok().body(numberOfComments);
 	}
 	
@@ -104,7 +104,7 @@ public class UserResponseAggregateQueryResource {
     @Timed
     public ResponseEntity<List<ReplyDTO>> getAllRepliesByCommentId(Pageable pageable,@PathVariable Long commentId) {
         log.debug("REST request to get a page of Replies by commentId");
-        Page<ReplyDTO> page = AggregateQueryService.findAllRepliesByCommentId(pageable,commentId);
+        Page<ReplyDTO> page = aggregateQueryService.findAllRepliesByCommentId(pageable,commentId);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/query/get-replies-by-commentId/{commentId}");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -121,7 +121,7 @@ public class UserResponseAggregateQueryResource {
 	@Timed
 	public ResponseEntity<Long> getNumberOfRepliesByCommentId(@PathVariable Long commentId) {
 		log.debug("REST request to get number of replies by comment id");
-		Long numberOfReplies = AggregateQueryService.findNumberOfRepliesByCommentId(commentId);
+		Long numberOfReplies = aggregateQueryService.findNumberOfRepliesByCommentId(commentId);
 		return ResponseEntity.ok().body(numberOfReplies);
 	}
 	
@@ -135,7 +135,7 @@ public class UserResponseAggregateQueryResource {
     @Timed
     public ResponseEntity<Long> getNumberOfLovesByCommitedActivityId(@PathVariable Long commitedActivityId){
         log.debug("REST request to get number of Loves of commitedActivity{}",commitedActivityId);
-        Long numberOfLovesOfCommitedActivity= AggregateQueryService.findNumberOfLovesByCommitedActivityId(commitedActivityId);
+        Long numberOfLovesOfCommitedActivity= aggregateQueryService.findNumberOfLovesByCommitedActivityId(commitedActivityId);
         return ResponseEntity.ok().body(numberOfLovesOfCommitedActivity);
     }
 
@@ -149,7 +149,7 @@ public class UserResponseAggregateQueryResource {
     @Timed
     public ResponseEntity<Long> getNumberOfLovesByCommentId(@PathVariable Long commentId){
         log.debug("REST request to get number of Loves of comments{}",commentId);
-        Long numberOfLovesOfComment= AggregateQueryService.findNumberOfLovesByCommentId(commentId);
+        Long numberOfLovesOfComment= aggregateQueryService.findNumberOfLovesByCommentId(commentId);
         return ResponseEntity.ok().body(numberOfLovesOfComment);
     }
     
@@ -163,7 +163,7 @@ public class UserResponseAggregateQueryResource {
     @Timed
     public ResponseEntity<Long> getNumberOfLovesByReplyId(@PathVariable Long replyId){
         log.debug("REST request to get number of Loves of replies{}",replyId);
-        Long numberOfLovesOfReply= AggregateQueryService.findNumberOfLovesByReplyId(replyId);
+        Long numberOfLovesOfReply= aggregateQueryService.findNumberOfLovesByReplyId(replyId);
         return ResponseEntity.ok().body(numberOfLovesOfReply);
     }
 

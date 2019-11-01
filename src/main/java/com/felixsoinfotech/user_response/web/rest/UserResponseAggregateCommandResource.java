@@ -35,7 +35,7 @@ public class UserResponseAggregateCommandResource {
 	private static final String ENTITY_NAME = "userResponseAggregateCommandResource";
 	
 	@Autowired
-	private AggregateCommandService AggregateCommandService;
+	private AggregateCommandService aggregateCommandService;
 
 	/**
      * POST  /loves : save a new love.
@@ -51,7 +51,7 @@ public class UserResponseAggregateCommandResource {
         if (loveDTO.getId() != null) {
             throw new BadRequestAlertException("A new love cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        LoveDTO result = AggregateCommandService.saveLove(loveDTO);
+        LoveDTO result = aggregateCommandService.saveLove(loveDTO);
         return ResponseEntity.created(new URI("/api/command/love-activity/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -71,7 +71,7 @@ public class UserResponseAggregateCommandResource {
         if (commentDTO.getId() != null) {
             throw new BadRequestAlertException("A new comment cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        CommentDTO result = AggregateCommandService.saveComment(commentDTO);
+        CommentDTO result = aggregateCommandService.saveComment(commentDTO);
         return ResponseEntity.created(new URI("/api/command/save-comment/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -91,7 +91,7 @@ public class UserResponseAggregateCommandResource {
         if (replyDTO.getId() != null) {
             throw new BadRequestAlertException("A new reply cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ReplyDTO result = AggregateCommandService.saveReply(replyDTO);
+        ReplyDTO result = aggregateCommandService.saveReply(replyDTO);
         return ResponseEntity.created(new URI("/api/command/save-reply/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -107,7 +107,7 @@ public class UserResponseAggregateCommandResource {
     @Timed
     public ResponseEntity<Void> unloveCommittedActivity(@RequestBody DeleteLoveModel deleteLoveModel) {
         log.debug("REST request to delete Love activity of the user : {}", deleteLoveModel);
-        AggregateCommandService.deleteLove(deleteLoveModel);
+        aggregateCommandService.deleteLove(deleteLoveModel);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, deleteLoveModel.toString())).build();
     }
 
@@ -121,7 +121,7 @@ public class UserResponseAggregateCommandResource {
     @Timed
     public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
         log.debug("REST request to delete Comment : {}", id);
-        AggregateCommandService.deleteComment(id);
+        aggregateCommandService.deleteComment(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
@@ -135,7 +135,7 @@ public class UserResponseAggregateCommandResource {
     @Timed
     public ResponseEntity<Void> deleteReply(@PathVariable Long id) {
         log.debug("REST request to delete Reply : {}", id);
-        AggregateCommandService.deleteReply(id);
+        aggregateCommandService.deleteReply(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
     
