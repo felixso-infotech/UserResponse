@@ -28,7 +28,7 @@ CREATE TABLE `comment` (
   `user_id` varchar(255) DEFAULT NULL,
   `commited_activity_id` bigint(20) DEFAULT NULL,
   `completed_challenge_id` bigint(20) DEFAULT NULL,
-  `date_and_time` datetime,
+  `date_and_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='Comment entity. @author Anjali';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -39,7 +39,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (1,'good work','anjali',1,NULL,'2019-08-21 20:09:28'),(2,'good','sarangi',2,NULL,'2019-08-22 20:09:28'),(3,'good job','sanil',2,NULL,'2019-08-22 20:09:28'),(4,'good job','anjali',3,NULL,'2019-08-22 20:09:28'),(5,'wow','ruhail',2,NULL,'2019-08-21 20:09:28');
+INSERT INTO `comment` VALUES (1,'good work','anjali',8,1,'2019-08-21 20:09:28'),(2,'good','sarangi',8,1,'2019-08-22 20:09:28'),(3,'good job','sanil',6,1,'2019-08-22 20:09:28'),(4,'good job','anjali',3,1,'2019-08-22 20:09:28'),(5,'wow','ruhail',6,1,'2019-08-21 20:09:28');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -251,7 +251,7 @@ CREATE TABLE `love` (
   `user_id` varchar(255) DEFAULT NULL,
   `commited_activity_id` bigint(20) DEFAULT NULL,
   `completed_challenge_id` bigint(20) DEFAULT NULL,
-  `date_and_time` datetime,
+  `date_and_time` datetime DEFAULT NULL,
   `comment_id` bigint(20) DEFAULT NULL,
   `reply_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -268,7 +268,7 @@ CREATE TABLE `love` (
 
 LOCK TABLES `love` WRITE;
 /*!40000 ALTER TABLE `love` DISABLE KEYS */;
-INSERT INTO `love` VALUES (1,'anjali',1,NULL,'2019-08-22 20:09:28',NULL,NULL),(2,'sarangi',1,NULL,'2019-08-22 20:09:28',NULL,NULL),(3,'ruhail',2,NULL,'2019-08-22 20:09:28',NULL,NULL),(6,'sanil',3,NULL,'2019-08-23 20:09:28',NULL,NULL),(7,'sarangi',3,NULL,'2019-08-23 20:09:28',NULL,NULL),(8,'sanil',2,NULL,'2019-08-23 20:09:28',NULL,NULL),(9,'sanil',4,NULL,'2019-08-23 20:09:28',NULL,NULL),(10,'anjali',NULL,NULL,'2019-08-23 20:09:28',2,NULL),(14,'anjali',NULL,NULL,'2019-08-23 20:09:28',NULL,1),(15,'anjali',NULL,NULL,'2019-08-23 20:09:28',NULL,3),(16,'ruhail',NULL,NULL,'2019-08-23 20:09:28',NULL,3),(17,'ruhail',NULL,NULL,'2019-08-23 20:09:28',NULL,4),(18,'sanil',NULL,NULL,'2019-08-22 20:09:28',2,NULL),(21,'ruhail',NULL,NULL,'2019-08-22 20:09:28',NULL,4);
+INSERT INTO `love` VALUES (1,'anjali',8,1,'2019-08-22 20:09:28',NULL,NULL),(2,'sarangi',8,1,'2019-08-22 20:09:28',NULL,NULL),(3,'ruhail',3,1,'2019-08-22 20:09:28',NULL,NULL),(6,'sanil',3,1,'2019-08-23 20:09:28',NULL,NULL),(7,'sarangi',3,1,'2019-08-23 20:09:28',NULL,NULL),(8,'sanil',6,1,'2019-08-23 20:09:28',NULL,NULL),(9,'sanil',6,1,'2019-08-23 20:09:28',NULL,NULL),(10,'anjali',6,1,'2019-08-23 20:09:28',2,NULL),(14,'anjali',6,1,'2019-08-23 20:09:28',NULL,1),(15,'anjali',3,1,'2019-08-23 20:09:28',NULL,3),(16,'ruhail',8,1,'2019-08-23 20:09:28',NULL,3),(17,'ruhail',8,1,'2019-08-23 20:09:28',NULL,4),(18,'sanil',8,1,'2019-08-22 20:09:28',2,NULL),(21,'ruhail',3,1,'2019-08-22 20:09:28',NULL,4);
 /*!40000 ALTER TABLE `love` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -283,7 +283,7 @@ CREATE TABLE `reply` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `description` varchar(255) DEFAULT NULL,
   `user_id` varchar(255) DEFAULT NULL,
-  `date_and_time` datetime,
+  `date_and_time` datetime DEFAULT NULL,
   `comment_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_reply_comment_id` (`comment_id`),
@@ -310,4 +310,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-28  0:21:39
+-- Dump completed on 2019-10-30 11:44:16

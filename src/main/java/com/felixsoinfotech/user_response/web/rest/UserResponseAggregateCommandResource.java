@@ -44,9 +44,9 @@ public class UserResponseAggregateCommandResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new loveDTO, or with status 400 (Bad Request) if the love has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/love-activity")
+    @PostMapping("/love-committedactivity")
     @Timed
-    public ResponseEntity<LoveDTO> loveActivity(@RequestBody LoveDTO loveDTO) throws URISyntaxException {
+    public ResponseEntity<LoveDTO> loveCommittedActivity(@RequestBody LoveDTO loveDTO) throws URISyntaxException {
         log.debug("REST request to save Love : {}", loveDTO);
         if (loveDTO.getId() != null) {
             throw new BadRequestAlertException("A new love cannot already have an ID", ENTITY_NAME, "idexists");
@@ -103,9 +103,9 @@ public class UserResponseAggregateCommandResource {
      * @param deleteLoveModel the deleteLoveModel of the loveDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/unlove-activity")
+    @DeleteMapping("/unlove-committedactivity")
     @Timed
-    public ResponseEntity<Void> unloveActivity(@RequestBody DeleteLoveModel deleteLoveModel) {
+    public ResponseEntity<Void> unloveCommittedActivity(@RequestBody DeleteLoveModel deleteLoveModel) {
         log.debug("REST request to delete Love activity of the user : {}", deleteLoveModel);
         AggregateCommandService.deleteLove(deleteLoveModel);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, deleteLoveModel.toString())).build();
