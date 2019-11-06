@@ -35,8 +35,6 @@ public class UserResponseAggregateQueryResource {
 
 	private final Logger log = LoggerFactory.getLogger(UserResponseAggregateQueryResource.class);
 
-	private static final String ENTITY_NAME = "userResponseAggregateQueryResource";
-
 	@Autowired
 	private AggregateQueryService aggregateQueryService;
 

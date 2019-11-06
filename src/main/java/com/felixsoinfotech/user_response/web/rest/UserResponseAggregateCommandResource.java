@@ -44,9 +44,9 @@ public class UserResponseAggregateCommandResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new loveDTO, or with status 400 (Bad Request) if the love has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/love-committedactivity")
+    @PostMapping("/save-love")
     @Timed
-    public ResponseEntity<LoveDTO> loveCommittedActivity(@RequestBody LoveDTO loveDTO) throws URISyntaxException {
+    public ResponseEntity<LoveDTO> doLove(@RequestBody LoveDTO loveDTO) throws URISyntaxException {
         log.debug("REST request to save Love : {}", loveDTO);
         if (loveDTO.getId() != null) {
             throw new BadRequestAlertException("A new love cannot already have an ID", ENTITY_NAME, "idexists");
@@ -66,7 +66,7 @@ public class UserResponseAggregateCommandResource {
      */
     @PostMapping("/save-comment")
     @Timed
-    public ResponseEntity<CommentDTO> saveComment(@RequestBody CommentDTO commentDTO) throws URISyntaxException {
+    public ResponseEntity<CommentDTO> doComment(@RequestBody CommentDTO commentDTO) throws URISyntaxException {
         log.debug("REST request to save Comment : {}", commentDTO);
         if (commentDTO.getId() != null) {
             throw new BadRequestAlertException("A new comment cannot already have an ID", ENTITY_NAME, "idexists");
@@ -86,7 +86,7 @@ public class UserResponseAggregateCommandResource {
      */
     @PostMapping("/save-reply")
     @Timed
-    public ResponseEntity<ReplyDTO> saveReply(@RequestBody ReplyDTO replyDTO) throws URISyntaxException {
+    public ResponseEntity<ReplyDTO> doReply(@RequestBody ReplyDTO replyDTO) throws URISyntaxException {
         log.debug("REST request to save Reply : {}", replyDTO);
         if (replyDTO.getId() != null) {
             throw new BadRequestAlertException("A new reply cannot already have an ID", ENTITY_NAME, "idexists");
