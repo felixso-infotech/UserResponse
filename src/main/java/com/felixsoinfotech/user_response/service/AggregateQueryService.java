@@ -74,4 +74,11 @@ public interface AggregateQueryService {
      * @return the entity
      */
 	Optional<CountAggregate> findCountOfCommentsAndLikesByCommitedActivityId(Long commitedActivityId);
+
+	/**
+	 * @param commitedActivityId
+	 * @param userId
+	 * @return
+	 */
+	Boolean isLikedCommittedActivityByUser(Long commitedActivityId, String userId);
 }

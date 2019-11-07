@@ -164,6 +164,22 @@ public class UserResponseAggregateQueryResource {
         Long numberOfLovesOfReply= aggregateQueryService.findNumberOfLovesByReplyId(replyId);
         return ResponseEntity.ok().body(numberOfLovesOfReply);
     }
+    
+    /**
+     * GET  /loves : get number of loves of replies.
+     *
+     * @param replyId the replyId to get number of loves
+     * @return the ResponseEntity with status 200 (OK) and the number of loves in body
+     */
+    @GetMapping("/isLiked/{commitedActivityId}/{userId}")
+    @Timed
+    public Boolean isLikedCommittedActivityByUser(@PathVariable Long commitedActivityId,@PathVariable String userId){
+        log.debug("REST request to isliked committed activity by user{}",commitedActivityId,userId);
+        
+        Boolean isLiked= aggregateQueryService.isLikedCommittedActivityByUser(commitedActivityId,userId);
+        
+        return isLiked;
+    }
 
 
 }

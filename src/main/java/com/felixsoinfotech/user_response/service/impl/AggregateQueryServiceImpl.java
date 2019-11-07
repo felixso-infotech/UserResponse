@@ -154,6 +154,18 @@ public class AggregateQueryServiceImpl implements AggregateQueryService {
         return loveRepository.findNumberOfLovesByReplyId(replyId);
     }
 
+
+    /**
+	 * @param commitedActivityId
+	 * @param userId
+	 * @return
+	 */
+	@Override
+	public Boolean isLikedCommittedActivityByUser(Long commitedActivityId, String userId) {		
+		log.debug("REST request to isliked committed activity by user");
+		return loveRepository.isLikedCommittedActivityByUser(commitedActivityId, userId);
+	}
+
 	
 
 }
