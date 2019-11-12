@@ -23,6 +23,7 @@ import com.felixsoinfotech.user_response.web.rest.util.PaginationUtil;
 
 import io.github.jhipster.web.util.ResponseUtil;
 
+import com.felixsoinfotech.user_response.model.CommentAggregate;
 import com.felixsoinfotech.user_response.model.CountAggregate;
 import com.felixsoinfotech.user_response.service.AggregateQueryService;
 
@@ -65,14 +66,15 @@ public class UserResponseAggregateQueryResource {
 	 * @return the ResponseEntity with status 200 (OK) and the list of comments
 	 *         in body
 	 */
-	@GetMapping("/get-comments-by-commitedActivityId/{commitedActivityId}")
+	@GetMapping("/get-comments/{commitedActivityId}")
 	@Timed
-	public ResponseEntity<List<CommentDTO>> getAllCommentsByCommitedActivityId(Pageable pageable,
-			@PathVariable Long commitedActivityId) {
+	public ResponseEntity<List<CommentAggregate>> getAllCommentsByCommitedActivityId(Pageable pageable,@PathVariable Long commitedActivityId) {
+		
 		log.debug("REST request to get a page of Comments");
-		Page<CommentDTO> page = aggregateQueryService.findAllCommentsByCommitedActivityId(pageable, commitedActivityId);
-		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page,
-				"/query/get-comments-by-commitedActivityId/{commitedActivityId}");
+		
+		Page<CommentAggregate> page = aggregateQueryService.findAllCommentsByCommitedActivityId(pageable,commitedActivityId);
+		
+		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page,"/query/get-comments/{commitedActivityId}");
 		return ResponseEntity.ok().headers(headers).body(page.getContent());
 	}
 

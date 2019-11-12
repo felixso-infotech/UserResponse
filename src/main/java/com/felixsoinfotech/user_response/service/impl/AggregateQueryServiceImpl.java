@@ -1,15 +1,19 @@
 package com.felixsoinfotech.user_response.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.felixsoinfotech.user_response.model.CommentAggregate;
 import com.felixsoinfotech.user_response.model.CountAggregate;
 import com.felixsoinfotech.user_response.repository.CommentRepository;
 import com.felixsoinfotech.user_response.repository.LoveRepository;
@@ -78,10 +82,38 @@ public class AggregateQueryServiceImpl implements AggregateQueryService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<CommentDTO> findAllCommentsByCommitedActivityId(Pageable pageable,Long commitedActivityId) {
+    public Page<CommentAggregate> findAllCommentsByCommitedActivityId(Pageable pageable,Long commitedActivityId) {
         log.debug("Request to get all Comments by commitedActivityId");
-        return commentRepository.findAllCommentsByCommitedActivityId(pageable,commitedActivityId)
-            .map(commentMapper::toDto);
+        
+         List<CommentAggregate>  commentAggregateList=new ArrayList<CommentAggregate>();
+         
+         CommentAggregate commentAggregate;
+        
+         Page<CommentDTO> commentDTOs=commentRepository.findAllCommentsByCommitedActivityId(pageable,commitedActivityId).map(commentMapper::toDto);
+         for(CommentDTO commentDTO :commentDTOs.getContent())
+         {
+        	 commentAggregate=new CommentAggregate();
+        	 
+        	 commentAggregate.setCommentId(commentDTO.getId());
+        	 commentAggregate.setDescription(commentDTO.getDescription());
+        	 commentAggregate.setCompletedChallengeId(commentDTO.getCompletedChallengeId());
+        	 commentAggregate.setCommitedActivityId(commentDTO.getCommitedActivityId());
+        	 commentAggregate.setCreatedDate(commentDTO.getDateAndTime());
+        	 
+        	 if(commentDTO.getId() != null)
+        	 {
+        	 commentAggregate.setNoOfLoves(loveRepository.findNumberOfLovesByCommentId(commentDTO.getId()));     	 
+          	 commentAggregate.setNoOfReplies(replyRepository.findNumberOfRepliesByCommentId(commentDTO.getId()));
+          	 commentAggregate.setLiked(loveRepository.isLikedCommentByUser(commentDTO.getId(),commentDTO.getUserId()));
+        	 }
+        	        	 
+        	 commentAggregateList.add(commentAggregate);
+        	 
+         }
+         
+         Page<CommentAggregate> pagee = new PageImpl<CommentAggregate>(commentAggregateList, pageable, commentAggregateList.size());
+
+ 		 return pagee;
     }
     
     /**

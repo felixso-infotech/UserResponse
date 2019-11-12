@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.felixsoinfotech.user_response.model.CommentAggregate;
 import com.felixsoinfotech.user_response.model.CountAggregate;
 import com.felixsoinfotech.user_response.service.dto.CommentDTO;
 import com.felixsoinfotech.user_response.service.dto.ReplyDTO;
@@ -17,7 +18,7 @@ public interface AggregateQueryService {
      * @param commitedActivityId the activity id to retrieve comments,pageable the pagination information
      * @return the list of entities
      */
-    Page<CommentDTO> findAllCommentsByCommitedActivityId(Pageable pageable,Long commitedActivityId);
+    Page<CommentAggregate> findAllCommentsByCommitedActivityId(Pageable pageable,Long commitedActivityId);
     
     /**
      * Get number of comments by commitedActivityId.
