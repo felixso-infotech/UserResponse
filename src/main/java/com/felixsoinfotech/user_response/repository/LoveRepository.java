@@ -30,5 +30,8 @@ public interface LoveRepository extends JpaRepository<Love, Long> {
 	@Query("SELECT CASE WHEN count(l) > 0 THEN true ELSE false END FROM Love l where l.comment.id=:commentId and l.userId=:userId")
     Boolean isLikedCommentByUser(@Param("commentId")Long commentId,@Param("userId") String userId);
 	
+	@Query("SELECT CASE WHEN count(l) > 0 THEN true ELSE false END FROM Love l where l.reply.id=:replyId and l.userId=:userId")
+    Boolean isLikedReplyByUser(@Param("replyId") Long replyId,@Param("userId") String userId);
+	
 	
 }

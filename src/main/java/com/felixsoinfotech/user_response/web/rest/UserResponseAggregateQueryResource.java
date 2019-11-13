@@ -25,6 +25,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 
 import com.felixsoinfotech.user_response.model.CommentAggregate;
 import com.felixsoinfotech.user_response.model.CountAggregate;
+import com.felixsoinfotech.user_response.model.ReplyAggregate;
 import com.felixsoinfotech.user_response.service.AggregateQueryService;
 
 /**
@@ -100,12 +101,14 @@ public class UserResponseAggregateQueryResource {
      * @param commentId the commentId to retrieve replies,pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of replies in body
      */
-    @GetMapping("/get-replies-by-commentId/{commentId}")
+    @GetMapping("/get-replies/{commentId}")
     @Timed
-    public ResponseEntity<List<ReplyDTO>> getAllRepliesByCommentId(Pageable pageable,@PathVariable Long commentId) {
+    public ResponseEntity<List<ReplyAggregate>> getAllRepliesByCommentId(Pageable pageable,@PathVariable Long commentId) {
         log.debug("REST request to get a page of Replies by commentId");
-        Page<ReplyDTO> page = aggregateQueryService.findAllRepliesByCommentId(pageable,commentId);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/query/get-replies-by-commentId/{commentId}");
+        
+        Page<ReplyAggregate> page = aggregateQueryService.findAllRepliesByCommentId(pageable,commentId);
+        
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/query/get-replies/{commentId}");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 

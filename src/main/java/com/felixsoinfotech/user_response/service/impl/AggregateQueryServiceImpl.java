@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.felixsoinfotech.user_response.model.CommentAggregate;
 import com.felixsoinfotech.user_response.model.CountAggregate;
+import com.felixsoinfotech.user_response.model.ReplyAggregate;
 import com.felixsoinfotech.user_response.repository.CommentRepository;
 import com.felixsoinfotech.user_response.repository.LoveRepository;
 import com.felixsoinfotech.user_response.repository.ReplyRepository;
@@ -94,27 +95,79 @@ public class AggregateQueryServiceImpl implements AggregateQueryService {
          {
         	 commentAggregate=new CommentAggregate();
         	 
+        	 if(commentDTO != null)
+        	 {        		 
         	 commentAggregate.setCommentId(commentDTO.getId());
         	 commentAggregate.setDescription(commentDTO.getDescription());
         	 commentAggregate.setCompletedChallengeId(commentDTO.getCompletedChallengeId());
         	 commentAggregate.setCommitedActivityId(commentDTO.getCommitedActivityId());
         	 commentAggregate.setCreatedDate(commentDTO.getDateAndTime());
         	 
-        	 if(commentDTO.getId() != null)
-        	 {
-        	 commentAggregate.setNoOfLoves(loveRepository.findNumberOfLovesByCommentId(commentDTO.getId()));     	 
-          	 commentAggregate.setNoOfReplies(replyRepository.findNumberOfRepliesByCommentId(commentDTO.getId()));
-          	 commentAggregate.setLiked(loveRepository.isLikedCommentByUser(commentDTO.getId(),commentDTO.getUserId()));
-        	 }
-        	        	 
-        	 commentAggregateList.add(commentAggregate);
-        	 
+        	     if(commentDTO.getId() != null)
+        	      {
+        	      commentAggregate.setNoOfLoves(loveRepository.findNumberOfLovesByCommentId(commentDTO.getId()));     	 
+          	      commentAggregate.setNoOfReplies(replyRepository.findNumberOfRepliesByCommentId(commentDTO.getId()));
+          	      
+          	         if(commentDTO.getUserId() != null)
+          	            commentAggregate.setLiked(loveRepository.isLikedCommentByUser(commentDTO.getId(),commentDTO.getUserId()));          	      
+        	      }
+        	 }      	 
+        	 commentAggregateList.add(commentAggregate);        	 
          }
          
          Page<CommentAggregate> pagee = new PageImpl<CommentAggregate>(commentAggregateList, pageable, commentAggregateList.size());
 
  		 return pagee;
     }
+    
+    /**
+     * Get all the replies by commentId.
+     *
+     * @param commentId the commentId to retrieve replies,pageable the pagination information
+     * @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Page<ReplyAggregate> findAllRepliesByCommentId(Pageable pageable,Long commentId) {
+    	
+        log.debug("Request to get all Replies by comment id");
+        
+        List<ReplyAggregate> replyAggregateList=new ArrayList<ReplyAggregate>();
+        ReplyAggregate replyAggregate;
+        
+        Page<ReplyDTO> replyDtos=replyRepository.findAllRepliesByCommentId(pageable,commentId).map(replyMapper::toDto);
+                
+        for(ReplyDTO replyDTO : replyDtos.getContent())
+        {
+        	replyAggregate= new ReplyAggregate();
+        	
+        	if(replyDTO != null)
+        	{
+        		replyAggregate.setReplyId(replyDTO.getId());
+        		replyAggregate.setCommentId(replyDTO.getCommentId());
+        		replyAggregate.setDescription(replyDTO.getDescription());
+        		replyAggregate.setDateAndTime(replyDTO.getDateAndTime());
+        		replyAggregate.setUserId(replyDTO.getUserId());
+        		
+        		if(replyDTO.getId() != null)
+        		{
+        			
+        		   if(replyDTO.getUserId() != null)
+        		   replyAggregate.setLiked(loveRepository.isLikedReplyByUser(replyDTO.getId(), replyDTO.getUserId()));
+        		
+        		replyAggregate.setNoOfLoves(loveRepository.findNumberOfLovesByReplyId(replyDTO.getId()));
+        		}
+        	}
+        	
+        	replyAggregateList.add(replyAggregate);
+        	
+        }
+        
+        Page<ReplyAggregate> pagee = new PageImpl<ReplyAggregate>(replyAggregateList, pageable, replyAggregateList.size());
+
+	    return pagee;
+    }
+
     
     /**
      *  Get number of comments by commitedActivityId.
@@ -127,20 +180,7 @@ public class AggregateQueryServiceImpl implements AggregateQueryService {
         return commentRepository.findNumberOfCommentsByCommitedActivityId(commitedActivityId);
     }
     
-    /**
-     * Get all the replies by commentId.
-     *
-     * @param commentId the commentId to retrieve replies,pageable the pagination information
-     * @return the list of entities
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public Page<ReplyDTO> findAllRepliesByCommentId(Pageable pageable,Long commentId) {
-        log.debug("Request to get all Replies by comment id");
-        return replyRepository.findAllRepliesByCommentId(pageable,commentId)
-            .map(replyMapper::toDto);
-    }
-
+   
     /**
      *  Get number of replies by commentId.
      *
