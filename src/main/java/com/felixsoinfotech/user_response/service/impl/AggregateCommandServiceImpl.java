@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.felixsoinfotech.user_response.domain.Comment;
 import com.felixsoinfotech.user_response.domain.Love;
 import com.felixsoinfotech.user_response.domain.Reply;
-import com.felixsoinfotech.user_response.model.DeleteLoveModel;
 import com.felixsoinfotech.user_response.repository.CommentRepository;
 import com.felixsoinfotech.user_response.repository.LoveRepository;
 import com.felixsoinfotech.user_response.repository.ReplyRepository;
@@ -100,9 +99,33 @@ public class AggregateCommandServiceImpl implements AggregateCommandService{
      * @param id the id of the entity
      */
     @Override
-    public void deleteLove(DeleteLoveModel deleteLoveModel) {
-        log.debug("Request to delete Love : {}", deleteLoveModel);
-        loveRepository.deleteByUserIdAndCommitedActivityId(deleteLoveModel.getUserId(), deleteLoveModel.getCommitedActivityId());
+    public void deleteLoveOfCommitedActivity(LoveDTO loveDto) {
+        log.debug("Request to delete Love : {}", loveDto);
+        loveRepository.deleteLoveOfCommitedActivityByUserIdAndCommitedActivityId(loveDto.getUserId(),loveDto.getCommitedActivityId());
+        
+    }
+    
+    /**
+     * Delete the loved activity of the user..
+     *
+     * @param id the id of the entity
+     */
+    @Override
+    public void deleteLoveOfComment(LoveDTO loveDto) {
+        log.debug("Request to delete Love : {}", loveDto);
+        loveRepository.deleteLoveOfCommentByUserIdAndCommentId(loveDto.getUserId(),loveDto.getCommentId());
+        
+    }
+    
+    /**
+     * Delete the loved activity of the user..
+     *
+     * @param id the id of the entity
+     */
+    @Override
+    public void deleteLoveOfReply(LoveDTO loveDto) {
+        log.debug("Request to delete Love : {}", loveDto);
+        loveRepository.deleteLoveOfReplyByUserIdAndReplyId(loveDto.getUserId(), loveDto.getReplyId());
         
     }
     

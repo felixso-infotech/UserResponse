@@ -13,7 +13,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LoveRepository extends JpaRepository<Love, Long> {
 
-	void deleteByUserIdAndCommitedActivityId(String userId, Long commitedActivityId);
+	void deleteLoveOfCommitedActivityByUserIdAndCommitedActivityId(String userId, Long commitedActivityId);
+	
+	void deleteLoveOfCommentByUserIdAndCommentId(String userId, Long commentId);
+	
+	void deleteLoveOfReplyByUserIdAndReplyId(String userId, Long ReplyId);
 	
 	@Query(value = "select count(l) from Love l where l.commitedActivityId=:commitedActivityId")
 	Long findNumberOfLovesByCommitedActivityId(@Param("commitedActivityId") Long commitedActivityId);

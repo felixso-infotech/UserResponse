@@ -1,6 +1,6 @@
 package com.felixsoinfotech.user_response.service;
 
-import com.felixsoinfotech.user_response.model.DeleteLoveModel;
+
 import com.felixsoinfotech.user_response.service.dto.CommentDTO;
 import com.felixsoinfotech.user_response.service.dto.LoveDTO;
 import com.felixsoinfotech.user_response.service.dto.ReplyDTO;
@@ -40,7 +40,21 @@ public interface AggregateCommandService {
      *
      * @param id the id of the entity
      */
-   void deleteLove(DeleteLoveModel deleteLoveModel);
+    void deleteLoveOfCommitedActivity(LoveDTO loveDto);
+    
+    /**
+     * Delete the loved activity of the user.
+     *
+     * @param id the id of the entity
+     */
+    void deleteLoveOfComment(LoveDTO loveDto);
+    
+    /**
+     * Delete the loved activity of the user.
+     *
+     * @param id the id of the entity
+     */
+    void deleteLoveOfReply(LoveDTO loveDto);
     
     
     /**

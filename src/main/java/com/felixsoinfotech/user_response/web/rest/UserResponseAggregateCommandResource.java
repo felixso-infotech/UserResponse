@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
-import com.felixsoinfotech.user_response.model.DeleteLoveModel;
 import com.felixsoinfotech.user_response.service.AggregateCommandService;
 import com.felixsoinfotech.user_response.service.dto.CommentDTO;
 import com.felixsoinfotech.user_response.service.dto.LoveDTO;
@@ -105,10 +104,38 @@ public class UserResponseAggregateCommandResource {
      */
     @DeleteMapping("/unlove-committedactivity")
     @Timed
-    public ResponseEntity<Void> unloveCommittedActivity(@RequestBody DeleteLoveModel deleteLoveModel) {
-        log.debug("REST request to delete Love activity of the user : {}", deleteLoveModel);
-        aggregateCommandService.deleteLove(deleteLoveModel);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, deleteLoveModel.toString())).build();
+    public ResponseEntity<Void> unloveCommittedActivity(@RequestBody LoveDTO loveDto) {
+        log.debug("REST request to delete Love activity of the user : {}", loveDto);
+        aggregateCommandService.deleteLoveOfCommitedActivity(loveDto);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, loveDto.toString())).build();
+    }
+    
+    /**
+     * DELETE  /loves : delete the loved activity of the user.
+     *
+     * @param deleteLoveModel the deleteLoveModel of the loveDTO to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    @DeleteMapping("/unlove-comment")
+    @Timed
+    public ResponseEntity<Void> unloveComment(@RequestBody LoveDTO loveDto) {
+        log.debug("REST request to delete Love activity of the user : {}", loveDto);
+        aggregateCommandService.deleteLoveOfComment(loveDto);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, loveDto.toString())).build();
+    }
+    
+    /**
+     * DELETE  /loves : delete the loved activity of the user.
+     *
+     * @param deleteLoveModel the deleteLoveModel of the loveDTO to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    @DeleteMapping("/unlove-reply")
+    @Timed
+    public ResponseEntity<Void> unloveReply(@RequestBody LoveDTO loveDto) {
+        log.debug("REST request to delete Love activity of the user : {}", loveDto);
+        aggregateCommandService.deleteLoveOfReply(loveDto);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, loveDto.toString())).build();
     }
 
     /**
