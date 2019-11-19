@@ -8,8 +8,7 @@ import org.springframework.data.domain.Pageable;
 import com.felixsoinfotech.user_response.model.CommentAggregate;
 import com.felixsoinfotech.user_response.model.CountAggregate;
 import com.felixsoinfotech.user_response.model.ReplyAggregate;
-import com.felixsoinfotech.user_response.service.dto.CommentDTO;
-import com.felixsoinfotech.user_response.service.dto.ReplyDTO;
+
 
 public interface AggregateQueryService {
 

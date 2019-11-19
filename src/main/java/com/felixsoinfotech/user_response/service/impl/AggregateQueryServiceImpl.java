@@ -108,8 +108,8 @@ public class AggregateQueryServiceImpl implements AggregateQueryService {
         	      commentAggregate.setNoOfLoves(loveRepository.findNumberOfLovesByCommentId(commentDTO.getId()));     	 
           	      commentAggregate.setNoOfReplies(replyRepository.findNumberOfRepliesByCommentId(commentDTO.getId()));
           	      
-          	         if(commentDTO.getUserId() != null)
-          	            commentAggregate.setLiked(loveRepository.isLikedCommentByUser(commentDTO.getId(),commentDTO.getUserId()));          	      
+          	         //if(commentDTO.getUserId() != null)
+          	            commentAggregate.setLiked(loveRepository.isLikedCommentByUser(commentDTO.getId(),"Sharai"));          	      
         	      }
         	 }      	 
         	 commentAggregateList.add(commentAggregate);        	 
@@ -152,8 +152,8 @@ public class AggregateQueryServiceImpl implements AggregateQueryService {
         		if(replyDTO.getId() != null)
         		{
         			
-        		   if(replyDTO.getUserId() != null)
-        		   replyAggregate.setLiked(loveRepository.isLikedReplyByUser(replyDTO.getId(), replyDTO.getUserId()));
+        		   //if(replyDTO.getUserId() != null)
+        		   replyAggregate.setLiked(loveRepository.isLikedReplyByUser(replyDTO.getId(),"Sharai"));
         		
         		replyAggregate.setNoOfLoves(loveRepository.findNumberOfLovesByReplyId(replyDTO.getId()));
         		}

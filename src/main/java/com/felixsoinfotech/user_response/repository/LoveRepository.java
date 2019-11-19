@@ -19,6 +19,13 @@ public interface LoveRepository extends JpaRepository<Love, Long> {
 	
 	void deleteLoveOfReplyByUserIdAndReplyId(String userId, Long ReplyId);
 	
+	/**
+	 * @param id
+	 * @return
+	 */
+	@Query(value = "select count(l) from Love l where l.userId=:userId")
+	Long findNumberOfLovesByUserId(@Param("userId") String userId);
+	
 	@Query(value = "select count(l) from Love l where l.commitedActivityId=:commitedActivityId")
 	Long findNumberOfLovesByCommitedActivityId(@Param("commitedActivityId") Long commitedActivityId);
 	
