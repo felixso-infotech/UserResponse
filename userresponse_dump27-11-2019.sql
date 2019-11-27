@@ -30,7 +30,7 @@ CREATE TABLE `comment` (
   `completed_challenge_id` bigint(20) DEFAULT NULL,
   `date_and_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='Comment entity. @author Anjali';
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COMMENT='Comment entity. @author Anjali';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (1,'good work','anjali',8,1,'2019-08-21 20:09:28'),(2,'good','sarangi',8,1,'2019-08-22 20:09:28'),(3,'good job','sanil',6,1,'2019-08-22 20:09:28'),(4,'good job','anjali',3,1,'2019-08-22 20:09:28'),(5,'wow','ruhail',6,1,'2019-08-21 20:09:28');
+INSERT INTO `comment` VALUES (1,'good work','Freeman',3,NULL,'2019-08-23 20:09:28'),(2,'good','Joli',3,NULL,'2019-07-23 20:09:28'),(3,'thank you all','Sharai',3,NULL,'2019-06-23 20:09:28'),(4,'haha','Joli',3,NULL,'2019-03-23 20:09:28'),(5,'wow','Doy',3,NULL,'2019-02-23 20:09:28'),(6,'wow','Jerry',3,NULL,'2019-06-23 20:09:28'),(7,'wow','Jerry',4,NULL,'2019-08-23 20:09:28'),(8,'wow','Doy',4,NULL,'2019-08-20 20:09:28'),(9,'wow','Joli',4,NULL,'2019-09-21 20:09:28'),(10,'good job','Jerry',4,NULL,'2019-08-24 20:09:28'),(11,'thank you','Sharai',4,NULL,'2019-04-23 20:09:28'),(12,'good','Joli',5,NULL,'2019-08-21 20:09:28'),(13,'nice','Jerry',5,NULL,'2019-08-10 20:09:28'),(14,'good job','Sharai',5,NULL,'2019-08-13 20:09:28'),(15,'woow','Doy',5,NULL,'2019-08-19 20:09:28'),(16,'Thnkss','Freeman',5,NULL,'2019-08-16 20:09:28'),(17,'lovely','Sharai',6,NULL,'2019-08-15 20:09:28'),(18,'good','Doy',6,NULL,'2019-08-23 20:09:28'),(19,'good','Jerry',6,NULL,'2019-08-23 20:09:28'),(20,'good','Joli',6,NULL,'2019-08-23 20:09:28'),(21,'thanks','Freeman',6,NULL,'2019-08-23 20:09:28'),(22,'wow','Jerry',9,NULL,'2019-08-23 20:09:28'),(23,'super','Sharai',9,NULL,'2019-08-23 20:09:28'),(24,'excellent','Doy',9,NULL,'2019-08-23 20:09:28'),(25,'good','Freeman',9,NULL,'2019-08-23 20:09:28'),(26,'thank you','Joli',9,NULL,'2019-08-23 20:09:28'),(27,'good work','Freeman',10,NULL,'2019-08-23 20:09:28'),(28,'nice','Jerry',10,NULL,'2019-08-13 20:09:28'),(29,'haii','Doy',10,NULL,'2019-08-14 20:09:28'),(30,'good','Sharai',10,NULL,'2019-08-10 20:09:28'),(31,'thanks','Joli',10,NULL,'2019-06-23 20:09:28'),(32,'good','Freeman',14,NULL,'2019-09-23 20:09:28'),(33,'good','Jerry',14,NULL,'2019-07-23 20:09:28'),(34,'nice','Joli',14,NULL,'2019-04-23 20:09:28'),(35,'lovely','Sharai',14,NULL,'2019-08-23 20:09:28'),(36,'thanks','Doy',14,NULL,'2019-09-21 20:09:28'),(37,'good','Jerry',15,NULL,'2019-09-24 20:09:28'),(38,'good job','Joli',15,NULL,'2019-08-23 20:09:28'),(39,'good work','Freeman',15,NULL,'2019-08-23 20:09:28'),(40,'nice','Sharai',15,NULL,'2019-08-23 20:09:28'),(41,'thank you','Doy',15,NULL,'2019-08-23 20:09:28'),(42,'good ','Freeman',18,NULL,'2019-08-23 20:09:28'),(43,'good','Doy',18,NULL,'2019-08-23 20:09:28'),(44,'good','Sharai',18,NULL,'2019-08-22 20:09:28'),(45,'good job','Joli',18,NULL,'2019-05-13 20:09:28'),(46,'thanks','Jerry',18,NULL,'2019-08-23 20:09:28'),(47,'good','Joli',20,NULL,'2019-08-23 20:09:28'),(48,'good','Sharai',20,NULL,'2019-08-23 20:09:28'),(49,'good job','Freeman',20,NULL,'2019-08-23 20:09:28'),(50,'good work','Doy',20,NULL,'2019-08-23 20:09:28'),(51,'tq','Jerry',20,NULL,'2019-08-23 20:09:28');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +259,7 @@ CREATE TABLE `love` (
   KEY `fk_love_reply_id` (`reply_id`),
   CONSTRAINT `fk_love_comment_id` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`),
   CONSTRAINT `fk_love_reply_id` FOREIGN KEY (`reply_id`) REFERENCES `reply` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='Love entity. @author Anjali';
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8 COMMENT='Love entity. @author Anjali';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,7 +268,7 @@ CREATE TABLE `love` (
 
 LOCK TABLES `love` WRITE;
 /*!40000 ALTER TABLE `love` DISABLE KEYS */;
-INSERT INTO `love` VALUES (1,'anjali',8,1,'2019-08-22 20:09:28',NULL,NULL),(2,'sarangi',8,1,'2019-08-22 20:09:28',NULL,NULL),(3,'ruhail',3,1,'2019-08-22 20:09:28',NULL,NULL),(6,'sanil',3,1,'2019-08-23 20:09:28',NULL,NULL),(7,'sarangi',3,1,'2019-08-23 20:09:28',NULL,NULL),(8,'sanil',6,1,'2019-08-23 20:09:28',NULL,NULL),(9,'sanil',6,1,'2019-08-23 20:09:28',NULL,NULL),(10,'anjali',6,1,'2019-08-23 20:09:28',2,NULL),(14,'anjali',6,1,'2019-08-23 20:09:28',NULL,1),(15,'anjali',3,1,'2019-08-23 20:09:28',NULL,3),(16,'ruhail',8,1,'2019-08-23 20:09:28',NULL,3),(17,'ruhail',8,1,'2019-08-23 20:09:28',NULL,4),(18,'sanil',8,1,'2019-08-22 20:09:28',2,NULL),(21,'ruhail',3,1,'2019-08-22 20:09:28',NULL,4);
+INSERT INTO `love` VALUES (1,'Freeman',3,NULL,'2019-08-22 20:09:28',NULL,NULL),(2,'Joli',3,NULL,'2019-08-22 20:09:28',NULL,NULL),(3,'Sharai',3,NULL,'2019-08-22 20:09:28',NULL,NULL),(4,'Doy',3,NULL,'2019-08-23 20:09:28',NULL,NULL),(5,'Jerry',3,NULL,'2019-08-23 20:09:28',NULL,NULL),(6,'Sharai',NULL,NULL,'2019-08-23 20:09:28',5,NULL),(7,'Joli',NULL,NULL,'2019-08-23 20:09:28',5,NULL),(8,'Doy',NULL,NULL,'2019-08-23 20:09:28',6,NULL),(9,'Freeman',NULL,NULL,'2019-08-23 20:09:28',NULL,1),(10,'Joli',NULL,NULL,'2019-08-23 20:09:28',NULL,2),(11,'Jerry',4,NULL,'2019-08-23 20:09:28',NULL,NULL),(12,'Freeman',4,NULL,'2019-08-23 20:09:28',NULL,NULL),(13,'Doy',4,NULL,'2019-08-22 20:09:28',NULL,NULL),(14,'Sharai',4,NULL,'2019-08-22 20:09:28',NULL,NULL),(15,'Sharai',NULL,NULL,'2019-08-22 20:09:28',8,NULL),(16,'Joli',NULL,NULL,'2019-08-22 20:09:28',8,NULL),(17,'Joli',NULL,NULL,'2019-08-22 20:09:28',9,NULL),(18,'Freeman',NULL,NULL,'2019-08-22 20:09:28',NULL,4),(19,'Doy',NULL,NULL,'2019-08-22 20:09:28',NULL,4),(20,'Freeman',5,NULL,'2019-08-22 20:09:28',NULL,NULL),(21,'Joli',5,NULL,'2019-08-22 20:09:28',NULL,NULL),(22,'Sharai',5,NULL,'2019-08-22 20:09:28',NULL,NULL),(23,'Doy',NULL,NULL,'2019-08-22 20:09:28',12,NULL),(24,'Doy',NULL,NULL,'2019-08-22 20:09:28',13,NULL),(25,'Joli',NULL,NULL,'2019-08-22 20:09:28',NULL,9),(26,'Freeman',NULL,NULL,'2019-08-22 20:09:28',NULL,9),(27,'Joli',6,NULL,'2019-08-22 20:09:28',NULL,NULL),(28,'Sharai',6,NULL,'2019-08-22 20:09:28',NULL,NULL),(29,'Doy',6,NULL,'2019-08-22 20:09:28',NULL,NULL),(30,'Jerry',NULL,NULL,'2019-08-22 20:09:28',18,NULL),(31,'Sharai',NULL,NULL,'2019-08-22 20:09:28',18,NULL),(32,'Sharai',NULL,NULL,'2019-08-22 20:09:28',NULL,12),(33,'Jerry',NULL,NULL,'2019-08-22 20:09:28',NULL,12),(34,'Sharai',NULL,NULL,'2019-08-22 20:09:28',NULL,13),(35,'Joli',9,NULL,'2019-08-22 20:09:28',NULL,13),(36,'Doy',9,NULL,'2019-08-22 20:09:28',NULL,13),(37,'Sharai',9,NULL,'2019-08-22 20:09:28',NULL,NULL),(38,'Joli',NULL,NULL,'2019-08-22 20:09:28',22,NULL),(39,'Freeman',NULL,NULL,'2019-08-22 20:09:28',23,NULL),(40,'Jerry',NULL,NULL,'2019-08-22 20:09:28',NULL,15),(41,'Sharai',NULL,NULL,'2019-08-22 20:09:28',NULL,16),(42,'Jerry',10,NULL,'2019-08-22 20:09:28',NULL,NULL),(43,'Freeman',10,NULL,'2019-08-22 20:09:28',NULL,NULL),(44,'Doy',NULL,NULL,'2019-08-22 20:09:28',27,NULL),(45,'Freeman',NULL,NULL,'2019-08-22 20:09:28',29,NULL),(46,'Joli',NULL,NULL,'2019-08-22 20:09:28',NULL,18),(47,'Jerry',NULL,NULL,'2019-08-22 20:09:28',NULL,19),(48,'Freeman',14,NULL,'2019-08-22 20:09:28',NULL,NULL),(49,'Joli',14,NULL,'2019-08-22 20:09:28',NULL,NULL),(50,'Jerry',14,NULL,'2019-08-22 20:09:28',NULL,NULL),(51,'Jerry',NULL,NULL,'2019-08-22 20:09:28',32,NULL),(52,'Freeman',NULL,NULL,'2019-08-22 20:09:28',32,NULL),(53,'Jerry',NULL,NULL,'2019-08-22 20:09:28',NULL,21),(54,'Jerry',NULL,NULL,'2019-08-22 20:09:28',NULL,20),(55,'Freeman',15,NULL,'2019-08-22 20:09:28',NULL,NULL),(56,'Jerry',15,NULL,'2019-08-22 20:09:28',NULL,NULL),(57,'Sharai',15,NULL,'2019-08-22 20:09:28',NULL,NULL),(58,'Doy',NULL,NULL,'2019-08-22 20:09:28',37,NULL),(59,'Jerry',NULL,NULL,'2019-08-22 20:09:28',38,NULL),(60,'Doy',NULL,NULL,'2019-08-22 20:09:28',39,NULL),(61,'Freeman',NULL,NULL,'2019-08-22 20:09:28',NULL,23),(62,'Jerry',NULL,NULL,'2019-08-22 20:09:28',NULL,24),(63,'Freeman',18,NULL,'2019-08-22 20:09:28',NULL,NULL),(64,'Doy',18,NULL,'2019-08-22 20:09:28',NULL,NULL),(65,'Sharai',18,NULL,'2019-08-22 20:09:28',NULL,NULL),(66,'Jerry',18,NULL,'2019-08-22 20:09:28',NULL,NULL),(67,'Sharai',NULL,NULL,'2019-08-22 20:09:28',44,NULL),(68,'Freeman',NULL,NULL,'2019-08-22 20:09:28',44,NULL),(69,'Joli',NULL,NULL,'2019-08-22 20:09:28',46,NULL),(70,'Joli',NULL,NULL,'2019-08-22 20:09:28',NULL,27),(71,'Joli',NULL,NULL,'2019-08-22 20:09:28',NULL,28),(72,'Sharai',20,NULL,'2019-08-22 20:09:28',NULL,NULL),(73,'Freeman',20,NULL,'2019-08-22 20:09:28',NULL,NULL),(74,'Joli',20,NULL,'2019-08-22 20:09:28',NULL,NULL),(75,'Jerry',20,NULL,'2019-08-22 20:09:28',NULL,NULL),(76,'Sharai',NULL,NULL,'2019-08-22 20:09:28',47,NULL),(77,'Joli',NULL,NULL,'2019-08-22 20:09:28',47,NULL),(78,'Joli',NULL,NULL,'2019-08-22 20:09:28',49,NULL),(79,'Freeman',NULL,NULL,'2019-08-22 20:09:28',50,NULL),(80,'Sharai',NULL,NULL,'2019-08-22 20:09:28',NULL,29),(81,'Joli',NULL,NULL,'2019-08-22 20:09:28',NULL,30),(82,'Freeman',NULL,NULL,'2019-08-22 20:09:28',NULL,31);
 /*!40000 ALTER TABLE `love` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -288,7 +288,7 @@ CREATE TABLE `reply` (
   PRIMARY KEY (`id`),
   KEY `fk_reply_comment_id` (`comment_id`),
   CONSTRAINT `fk_reply_comment_id` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='Reply entity. @author Anjali';
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COMMENT='Reply entity. @author Anjali';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -297,7 +297,7 @@ CREATE TABLE `reply` (
 
 LOCK TABLES `reply` WRITE;
 /*!40000 ALTER TABLE `reply` DISABLE KEYS */;
-INSERT INTO `reply` VALUES (1,'tq','sarangi','2019-08-22 20:09:28',1),(2,'thanku','anjali','2019-08-22 20:09:28',2),(3,'thanku','sarangi','2019-08-22 20:09:28',3),(4,'thanku sir','anjali','2019-08-22 20:09:28',3);
+INSERT INTO `reply` VALUES (1,'tq','Sharai','2019-08-22 20:09:28',1),(2,'thanku','Sharai','2019-08-20 20:09:28',2),(3,'thanku','Sharai','2019-08-21 20:09:28',4),(4,'thanku sir','Sharai','2019-08-22 20:09:28',7),(5,'thanku sir','Sharai','2019-08-22 20:09:28',8),(6,'thanku','Sharai','2019-06-21 20:09:28',9),(7,'thanku','Sharai','2019-07-12 20:09:28',10),(8,'thanku','Freeman','2019-07-12 20:09:28',12),(9,'thanks','Freeman','2019-07-12 20:09:28',13),(10,'tq','Freeman','2019-07-12 20:09:28',14),(11,'tqu','Freeman','2019-07-12 20:09:28',15),(12,'thanku','Freeman','2019-07-12 20:09:28',18),(13,'taks','Freeman','2019-07-12 20:09:28',19),(14,'thanku dear','Freeman','2019-07-12 20:09:28',20),(15,'thanku','Joli','2019-07-12 20:09:28',23),(16,'tq','Joli','2019-07-12 20:09:28',24),(17,'thanku dear','Joli','2019-07-12 20:09:28',25),(18,'thanku','Joli','2019-07-12 20:09:28',29),(19,'thanku','Joli','2019-07-12 20:09:28',30),(20,'thanku','Doy','2019-07-12 20:09:28',33),(21,'tq','Doy','2019-07-12 20:09:28',34),(22,'tquu','Doy','2019-07-12 20:09:28',35),(23,'tquu ','Doy','2019-07-12 20:09:28',38),(24,'tquu','Doy','2019-07-12 20:09:28',39),(25,'tquu','Doy','2019-07-12 20:09:28',40),(26,'tquu','Jerry','2019-07-12 20:09:28',43),(27,'thanks','Jerry','2019-07-12 20:09:28',44),(28,'thanks','Jerry','2019-07-12 20:09:28',45),(29,'thank u','Jerry','2019-07-12 20:09:28',48),(30,'thanks dear','Jerry','2019-07-12 20:09:28',49),(31,'thanks','Jerry','2019-07-12 20:09:28',50),(32,'nice','Joli','2019-07-12 20:09:28',50);
 /*!40000 ALTER TABLE `reply` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -310,4 +310,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-30 11:44:16
+-- Dump completed on 2019-11-27 15:57:07
