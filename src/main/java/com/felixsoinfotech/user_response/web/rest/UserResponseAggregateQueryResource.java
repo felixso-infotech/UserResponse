@@ -194,7 +194,7 @@ public class UserResponseAggregateQueryResource {
      * @param replyId the replyId to get number of loves
      * @return the ResponseEntity with status 200 (OK) and the number of loves in body
      */
-    @GetMapping("/isLiked/{commentId}/{userId}")
+    @GetMapping("/isLikedComment/{commentId}/{userId}")
     @Timed
     public Boolean isLikedCommentByUser(@PathVariable Long commentId,@PathVariable String userId){
         log.debug("REST request to isliked comment by user{}",commentId,userId);
@@ -212,7 +212,7 @@ public class UserResponseAggregateQueryResource {
      * @param replyId the replyId to get number of loves
      * @return the ResponseEntity with status 200 (OK) and the number of loves in body
      */
-    @GetMapping("/isLiked/{replyId}/{userId}")
+    @GetMapping("/isLikedReply/{replyId}/{userId}")
     @Timed
     public Boolean isLikedReplyByUser(@PathVariable Long replyId,@PathVariable String userId){
     	
