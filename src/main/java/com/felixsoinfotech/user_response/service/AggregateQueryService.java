@@ -82,4 +82,32 @@ public interface AggregateQueryService {
 	 * @return
 	 */
 	Boolean isLikedCommittedActivityByUser(Long commitedActivityId, String userId);
+	
+	/**
+	 * @param commentId
+	 * @param userId
+	 * @return
+	 */
+	Boolean isLikedCommentByUser(Long commentId, String userId);
+	
+	/**
+	 * @param replyId
+	 * @param userId
+	 * @return
+	 */
+	Boolean isLikedReplyByUser(Long replyId, String userId);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

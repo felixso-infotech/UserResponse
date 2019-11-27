@@ -186,5 +186,61 @@ public class UserResponseAggregateQueryResource {
         return isLiked;
     }
 
-
+    
+    
+    /**
+     * GET  /loves : get number of loves of replies.
+     *
+     * @param replyId the replyId to get number of loves
+     * @return the ResponseEntity with status 200 (OK) and the number of loves in body
+     */
+    @GetMapping("/isLiked/{commentId}/{userId}")
+    @Timed
+    public Boolean isLikedCommentByUser(@PathVariable Long commentId,@PathVariable String userId){
+        log.debug("REST request to isliked comment by user{}",commentId,userId);
+        
+        Boolean isLiked= aggregateQueryService.isLikedCommentByUser(commentId,userId);
+        
+        return isLiked;
+    }
+    
+    
+    
+    /**
+     * GET  /loves : get number of loves of replies.
+     *
+     * @param replyId the replyId to get number of loves
+     * @return the ResponseEntity with status 200 (OK) and the number of loves in body
+     */
+    @GetMapping("/isLiked/{replyId}/{userId}")
+    @Timed
+    public Boolean isLikedReplyByUser(@PathVariable Long replyId,@PathVariable String userId){
+    	
+        log.debug("REST request to isliked reply by user{}",replyId,userId);
+        
+        Boolean isLiked= aggregateQueryService.isLikedReplyByUser(replyId,userId);
+        
+        return isLiked;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

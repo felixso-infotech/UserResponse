@@ -51,8 +51,6 @@ public class AggregateQueryServiceImpl implements AggregateQueryService {
 	@Autowired
 	private LoveRepository loveRepository;
 
-	@Autowired
-    private LoveMapper loveMapper;
 	
 	
 	/**
@@ -109,7 +107,7 @@ public class AggregateQueryServiceImpl implements AggregateQueryService {
           	      commentAggregate.setNoOfReplies(replyRepository.findNumberOfRepliesByCommentId(commentDTO.getId()));
           	      
           	         //if(commentDTO.getUserId() != null)
-          	            commentAggregate.setLiked(loveRepository.isLikedCommentByUser(commentDTO.getId(),"Sharai"));          	      
+          	            //commentAggregate.setLiked(loveRepository.isLikedCommentByUser(commentDTO.getId(),"Sharai"));          	      
         	      }
         	 }      	 
         	 commentAggregateList.add(commentAggregate);        	 
@@ -153,7 +151,7 @@ public class AggregateQueryServiceImpl implements AggregateQueryService {
         		{
         			
         		   //if(replyDTO.getUserId() != null)
-        		   replyAggregate.setLiked(loveRepository.isLikedReplyByUser(replyDTO.getId(),"Sharai"));
+        		   //replyAggregate.setLiked(loveRepository.isLikedReplyByUser(replyDTO.getId(),"Sharai"));
         		
         		replyAggregate.setNoOfLoves(loveRepository.findNumberOfLovesByReplyId(replyDTO.getId()));
         		}
@@ -238,6 +236,26 @@ public class AggregateQueryServiceImpl implements AggregateQueryService {
 		return loveRepository.isLikedCommittedActivityByUser(commitedActivityId, userId);
 	}
 
-	
+	 /**
+		 * @param commitedActivityId
+		 * @param userId
+		 * @return
+		 */
+		@Override
+		public Boolean isLikedCommentByUser(Long commentId, String userId) {		
+			log.debug("REST request to  isliked comment by user");
+			return loveRepository.isLikedCommentByUser(commentId, userId);
+		}
+		
+		 /**
+		 * @param commitedActivityId
+		 * @param userId
+		 * @return
+		 */
+		@Override
+		public Boolean isLikedReplyByUser(Long replyId, String userId) {		
+			log.debug("REST request to isliked reply by user");
+			return loveRepository.isLikedReplyByUser(replyId, userId);
+		}
 
 }
