@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
 
-	Page<Reply> findAllRepliesByCommentId(Pageable pageable,Long commentId);
+	Page<Reply> findAllRepliesByCommentIdOrderByDateAndTimeDesc(Pageable pageable,Long commentId);
 	
 	@Query(value = "select count(r) from Reply r where r.comment.id=:commentId")
 	Long findNumberOfRepliesByCommentId(@Param("commentId") Long commentId);

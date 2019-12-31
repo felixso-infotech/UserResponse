@@ -88,7 +88,7 @@ public class AggregateQueryServiceImpl implements AggregateQueryService {
          
          CommentAggregate commentAggregate;
         
-         Page<CommentDTO> commentDTOs=commentRepository.findAllCommentsByCommitedActivityId(pageable,commitedActivityId).map(commentMapper::toDto);
+         Page<CommentDTO> commentDTOs=commentRepository.findAllCommentsByCommitedActivityIdOrderByDateAndTimeDesc(pageable,commitedActivityId).map(commentMapper::toDto);
          for(CommentDTO commentDTO :commentDTOs.getContent())
          {
         	 commentAggregate=new CommentAggregate();
@@ -133,7 +133,7 @@ public class AggregateQueryServiceImpl implements AggregateQueryService {
         List<ReplyAggregate> replyAggregateList=new ArrayList<ReplyAggregate>();
         ReplyAggregate replyAggregate;
         
-        Page<ReplyDTO> replyDtos=replyRepository.findAllRepliesByCommentId(pageable,commentId).map(replyMapper::toDto);
+        Page<ReplyDTO> replyDtos=replyRepository.findAllRepliesByCommentIdOrderByDateAndTimeDesc(pageable,commentId).map(replyMapper::toDto);
                 
         for(ReplyDTO replyDTO : replyDtos.getContent())
         {
